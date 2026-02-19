@@ -1,0 +1,450 @@
+{
+  "info": {
+    "name": "Orders API",
+    "description": "Cardápio - garçom, mesas, commands, carrinhos",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:3000" },
+    { "key": "access_token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Store Access",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"1234\",\n  \"slug\": \"loja-centro\"\n}"
+            },
+            "url": "{{base_url}}/auth/store-access"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Stores",
+      "item": [
+        {
+          "name": "Create Store",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Loja Centro\",\n  \"slug\": \"loja-centro\",\n  \"address\": \"Rua X, 1\"\n}"
+            },
+            "url": "{{base_url}}/stores"
+          }
+        },
+        {
+          "name": "List Stores",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/stores?page=1&limit=10"
+          }
+        },
+        {
+          "name": "Get Store by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/stores/1"
+          }
+        },
+        {
+          "name": "Update Store",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Loja Centro Atualizada\",\n  \"address\": \"Rua Y, 2\"\n}"
+            },
+            "url": "{{base_url}}/stores/1"
+          }
+        },
+        {
+          "name": "Delete Store",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/stores/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Waiters",
+      "item": [
+        {
+          "name": "Create Waiter",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"store_id\": 1,\n  \"name\": \"João\",\n  \"email\": \"joao@loja.com\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": "{{base_url}}/waiters"
+          }
+        },
+        {
+          "name": "List Waiters",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+            "url": "{{base_url}}/waiters?store_id=1&page=1&limit=10"
+          }
+        },
+        {
+          "name": "Get Waiter by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/waiters/1"
+          }
+        },
+        {
+          "name": "Update Waiter",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"João Silva\",\n  \"email\": \"joao.silva@loja.com\"\n}"
+            },
+            "url": "{{base_url}}/waiters/1"
+          }
+        },
+        {
+          "name": "Delete Waiter",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/waiters/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tables",
+      "item": [
+        {
+          "name": "Create Table",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"store_id\": 1,\n  \"number\": 2\n}"
+            },
+            "url": "{{base_url}}/tables"
+          }
+        },
+        {
+          "name": "List Tables",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/tables?store_id=1&page=1&limit=10"
+          }
+        },
+        {
+          "name": "Get Table by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/tables/1"
+          }
+        },
+        {
+          "name": "Update Table",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"number\": 3\n}" },
+            "url": "{{base_url}}/tables/1"
+          }
+        },
+        {
+          "name": "Delete Table",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/tables/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Commands",
+      "item": [
+        {
+          "name": "Create Command",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"table_id\": 1\n}" },
+            "url": "{{base_url}}/commands"
+          }
+        },
+        {
+          "name": "List Commands",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/commands?table_id=1&page=1&limit=10"
+          }
+        },
+        {
+          "name": "Get Command by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/commands/1"
+          }
+        },
+        {
+          "name": "Delete Command",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/commands/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "Create Category",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"store_id\": 1,\n  \"name\": \"Bebidas\",\n  \"description\": \"Refrigerantes e sucos\"\n}"
+            },
+            "url": "{{base_url}}/categories"
+          }
+        },
+        {
+          "name": "List Categories",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/categories?store_id=1&page=1&limit=10"
+          }
+        },
+        {
+          "name": "Get Category by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/categories/1"
+          }
+        },
+        {
+          "name": "Update Category",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Bebidas e Drinks\",\n  \"description\": \"Atualizado\"\n}"
+            },
+            "url": "{{base_url}}/categories/1"
+          }
+        },
+        {
+          "name": "Delete Category",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/categories/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"category_id\": 1,\n  \"name\": \"Coca-Cola\",\n  \"price\": 5.50,\n  \"description\": \"350ml\"\n}"
+            },
+            "url": "{{base_url}}/products"
+          }
+        },
+        {
+          "name": "List Products",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/products?category_id=1&page=1&limit=10"
+          }
+        },
+        {
+          "name": "Get Product by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/products/1"
+          }
+        },
+        {
+          "name": "Update Product",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Coca-Cola Lata\",\n  \"price\": 6.00\n}"
+            },
+            "url": "{{base_url}}/products/1"
+          }
+        },
+        {
+          "name": "Delete Product",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/products/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Product Add-ons",
+      "item": [
+        {
+          "name": "Create Product Add-on",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"product_id\": 1,\n  \"name\": \"Gelo\",\n  \"price\": 0.50\n}"
+            },
+            "url": "{{base_url}}/product-addons"
+          }
+        },
+        {
+          "name": "List Product Add-ons",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/product-addons?product_id=1&page=1&limit=10"
+          }
+        },
+        {
+          "name": "Get Product Add-on by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/product-addons/1"
+          }
+        },
+        {
+          "name": "Update Product Add-on",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Gelo extra\",\n  \"price\": 1.00\n}" },
+            "url": "{{base_url}}/product-addons/1"
+          }
+        },
+        {
+          "name": "Delete Product Add-on",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/product-addons/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Carts",
+      "item": [
+        {
+          "name": "Create Cart",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"command_id\": 1,\n  \"payment_method\": \"card\"\n}"
+            },
+            "url": "{{base_url}}/carts"
+          }
+        },
+        {
+          "name": "List Carts",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/carts?command_id=1&page=1&limit=10"
+          }
+        },
+        {
+          "name": "Get Cart by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/carts/1"
+          }
+        },
+        {
+          "name": "Update Cart",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"payment_method\": \"pix\"\n}" },
+            "url": "{{base_url}}/carts/1"
+          }
+        },
+        {
+          "name": "Delete Cart",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/carts/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cart Items",
+      "item": [
+        {
+          "name": "Create Cart Item",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cart_id\": 1,\n  \"product_id\": 1,\n  \"quantity\": 2,\n  \"addon_ids\": [1, 2]\n}"
+            },
+            "url": "{{base_url}}/cart-items"
+          }
+        },
+        {
+          "name": "Get Cart Item by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/cart-items/1"
+          }
+        },
+        {
+          "name": "Update Cart Item",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quantity\": 3,\n  \"addon_ids\": [1]\n}"
+            },
+            "url": "{{base_url}}/cart-items/1"
+          }
+        },
+        {
+          "name": "Delete Cart Item",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/cart-items/1"
+          }
+        }
+      ]
+    }
+  ]
+}

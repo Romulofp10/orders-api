@@ -1,0 +1,41 @@
+---
+description: Ao alterar controller ou service, atualizar a collection do Postman
+globs: src/**/*.controller.ts, src/**/*.service.ts
+alwaysApply: false
+---
+
+# Sincronizar rotas com a collection do Postman
+
+Sempre que houver **alteração** em um arquivo de **controller** ou **service** que afete uma rota da API, é obrigatório atualizar a collection do Postman.
+
+## Onde fica a collection
+
+- **Arquivo:** `docs/orders-api-postman-collection.json`
+
+## O que atualizar
+
+1. **Nova rota** (novo endpoint no controller): adicionar um novo request na pasta correspondente da collection, com método, URL, headers e body de exemplo.
+2. **Rota alterada** (mudança de path, método ou parâmetros): ajustar o request existente na collection para refletir a nova assinatura.
+3. **Novo campo no body** (DTO de create/update): incluir o campo no `body.raw` do request POST/PATCH correspondente, com valor de exemplo.
+4. **Campo removido ou renomeado no DTO:** remover ou renomear no body da collection.
+5. **Novo query param:** adicionar no `url` do request (ex.: `?novo_param=valor`) ou documentar.
+
+## Formato da URL na collection
+
+- Usar a variável `{{base_url}}` (ex.: `{{base_url}}/stores`).
+- Path params: usar ID numérico no path (ex.: `/stores/1`); o usuário ajusta ao testar.
+- Query params: incluir na URL com valores de exemplo (ex.: `?store_id=1&page=1&limit=10`).
+
+## Body JSON
+
+- POST/PATCH: `Content-Type: application/json` no header.
+- `body.raw`: JSON com snake_case, igual aos DTOs da API (ex.: `store_id`, `payment_method`).
+
+## Checklist rápido
+
+Após editar um controller ou service, verificar:
+
+- [ ] A rota está listada na collection na pasta correta?
+- [ ] Método HTTP e path estão corretos?
+- [ ] Body (se houver) contém todos os campos obrigatórios e opcionais atuais do DTO?
+- [ ] Query params usados na rota estão na URL do request?

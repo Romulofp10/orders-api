@@ -1,0 +1,32 @@
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+import { Store } from '../../stores/entities/store.entity';
+
+@Entity('tables')
+export class Table {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column({ name: 'store_id' })
+  store_id: number;
+
+  @ManyToOne(() => Store)
+  @JoinColumn({ name: 'store_id' })
+  store: Store;
+
+  @Column()
+  number: number;
+
+  @CreateDateColumn({ name: 'created_at' })
+  created_at: Date;
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updated_at: Date;
+}
